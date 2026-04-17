@@ -1,63 +1,63 @@
 
 //Assign the x and y from textbox
 let x = Number(document.getElementById("width").value);
-let y = Number(document.getElementById("length").value);
-
-const row = document.createElement("tr");
-const column = document.createElement("td");
+let y = Number(document.getElementById("height").value);
 
 
 
-//Gets width and legth
-function autoXY() {
+
+
+//Create table
+function autoTable() {
+    let grid = document.createElement(`table`);
     x = Number(document.getElementById("width").value);
-    y = Number(document.getElementById("length").value);
-}
+    y = Number(document.getElementById("height").value);
 
-function tbl() {
-    for (r=0; r < x; r++) {
-        document.getElementById("grid").appendChild(row);
-        for (c=0;c < y; c++) {
-            document.getElementById("grid").appendChild(column);
-
+    for (r = 0; r < x; r++) {
+        let tableRow = document.createElement(`tr`);
+        for (c = 0; c < y; c++) {
+            let tableColumn = document.createElement(`td`);
+            tableColumn.appendChild(tableRow);
         }
+        tableRow.appendChild(grid);
+
     }
 }
+
 
 
 
 //Run autoXY every 0.2 seconds
-setInterval(autoXY, 200);
-setInterval(tbl, 200);
+setInterval(autoTable, 200);
 
+class Cell {
+    width_px;
+    height_px;
+    td;
+    parent;
+    color;
+    isWall = false;
+    children = []
+    pos;
+    constructor(width_px, height_px, pos, grid) {
+        this.width_px
+        this.height_px
+        this.pos
+        this.grid
+    } 
 
-
-/*
-class grid {
-    constructor(maxWidth, maxLength) { 
-    this.maxWidth = x
-    this.maxLength = y
+    generateCellDiv(){
+        let newTD = document.createElement(`td`)
+        newTD.style.width = 15
+        newTD.style.heigth = 15
     }
     
-    tbl() {
-        const column = document.createElement("td")
-        const row = document.createElement("tr")
-        
-        for (r=0; r != x; r++) {
-            document.getElementById("grid").appendChild(row);
-            for (c=0;c != y; c++) {
-                document.getElementById("grid").appendChild(column);
 
-            }
-        }
-    }
 }
 
 
 
 
-
-*/
 
 
 
