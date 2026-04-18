@@ -3,24 +3,45 @@
 let x = Number(document.getElementById("width").value);
 let y = Number(document.getElementById("height").value);
 
-
+//Create array to test if there was a change
+let xTestTable = [x]
+let yTestTable = [y]
 
 
 
 //Create table
 function autoTable() {
-    let grid = document.createElement(`table`);
     x = Number(document.getElementById("width").value);
     y = Number(document.getElementById("height").value);
 
-    for (r = 0; r < x; r++) {
-        let tableRow = document.createElement(`tr`);
-        for (c = 0; c < y; c++) {
-            let tableColumn = document.createElement(`td`);
-            tableColumn.appendChild(tableRow);
-        }
-        tableRow.appendChild(grid);
+    if (xTestTable[0] != x || yTestTable[0] != y) {
 
+        let grid = document.createElement(`table`);
+
+
+        for (r = 0; r < y; r++) {
+            let tableRow = document.createElement(`tr`);
+            for (c = 0; c < x; c++) {
+                let tableColumn = document.createElement(`td`);
+                tableRow.appendChild(tableColumn);
+            }
+            grid.appendChild(tableRow);
+
+        }
+
+        //Checks if there is a table. If there is, removes the table.
+        if (document.querySelector('table') != null) {
+            document.querySelector('table').remove()
+        }
+
+        //create grid
+        document.body.appendChild(grid)
+
+        //reset and reassign xyTestTable
+        xTestTable = [x]
+        yTestTable = [y]
+    } else {
+        return;
     }
 }
 
@@ -28,6 +49,7 @@ function autoTable() {
 
 
 //Run autoXY every 0.2 seconds
+
 setInterval(autoTable, 200);
 
 class Cell {
