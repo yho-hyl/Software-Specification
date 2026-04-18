@@ -60,7 +60,7 @@ class Cell {
     isStart = false;
     isEnd = false;
     children = [];
-    position;
+    position=0;
     constructor(position) {
         this.position = position
 
@@ -75,8 +75,16 @@ class Cell {
 
 }
 
+class testtttt extends Cell {
+    constructor(position, abcd) {
+        super();
+        this.abcd = abcd
+    }
+
+}
 
 
+trialA = new testtttt(3,4)
 
 
 
