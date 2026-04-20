@@ -22,8 +22,8 @@ function autoTable() {
         for (r = 0; r < y; r++) {
             let tableRow = document.createElement(`tr`);
             for (c = 0; c < x; c++) {
-                let tableColumn = document.createElement(`td`); //Will need to change this with Cell class
-                tableRow.appendChild(tableColumn);
+                let tableColumn = new Cell(c, r); //Will need to change this with Cell class
+                tableRow.appendChild(tableColumn.table);
             }
             grid.appendChild(tableRow);
 
@@ -53,39 +53,40 @@ function autoTable() {
 setInterval(autoTable, 200);
 
 class Cell {
-    totalDistance = 0;
-    parent;
-    color;
-    isWall = false;
+    x;
+    y;
     isStart = false;
     isEnd = false;
-    children = [];
-    position=0;
-    constructor(position) {
-        this.position = position
+    isWall = false;
+    table;
 
+
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+
+        
+        // Generate the HTML element right when the cell is created
+        this.table = this.generateCellDiv(this.x, this.y); 
     } 
     
-    generateCellDiv(){
-        let newTD = document.createElement(`td`)
-        newTD.style.width = "auto"
-        newTD.style.heigth = "auto"
-    }
     
 
-}
+    generateCellDiv(x,y) {
+        let td = document.createElement(`td`);
+        
+        // Set style for each cell
+        td.style.width = "25px";
+        td.style.height = "25px"; 
 
-class testtttt extends Cell {
-    constructor(position, abcd) {
-        super();
-        this.abcd = abcd
+        //Check if clicked
+        td.addEventListener("click", function(){
+            console.log(isStart)
+//            if (super(isStart) != true) {
+  //              super()
+    //        }
+        })
+                
+        return td;
     }
-
 }
-
-
-trialA = new testtttt(3,4)
-
-
-
-
