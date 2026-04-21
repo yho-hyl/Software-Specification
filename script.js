@@ -18,12 +18,14 @@ function autoTable() {
 
         let grid = document.createElement(`table`);
 
-
+        capsule = []
         for (r = 0; r < y; r++) {
             let tableRow = document.createElement(`tr`);
+            let row = capsule.push([])
             for (c = 0; c < x; c++) {
                 let tableColumn = new Cell(c, r); //Will need to change this with Cell class
                 tableRow.appendChild(tableColumn.table);
+                let column = row.push([])
             }
             grid.appendChild(tableRow);
 
@@ -81,39 +83,34 @@ class Cell {
 
         //Check if clicked
         td.addEventListener("click", function(){
+            console.log(start)
+            console.log(this.start)
             //Check if there is already a start Cell and if not assign the cell as the Start Cell
-            if (this.start != true && start != true) {
+            if (this.start != true) {
                 this.start = true //Make Parent Cell's start variable true
                 start = true //Make the Cell's start variable true
 
                 //Change style
                 td.style.backgroundColor = "green"
 
-            } else if (this.start == true || start == true) {
+            } else if (this.end != true && this.start == true) {
                 this.start = false //Make Parent Cell's start variable false
                 start = false //Make the Cell's start variable false
 
                 //Change style
-                td.style.backgroundColor = "transparent"
-            }
+                td.style.backgroundColor = "red"
 
+            } else {
+                wall = true
+
+                //change style
+                td.style.backgroundColor = "black"
+            } 
 
             //Check if there is already an end Cell and if not assign the cell as the End Cell
             console.log(start)
-            if (this.end != true && end != true && this.start == true) {
-                this.end = true //Make Parent Cell's start variable true
-                end = true //Make the Cell's start variable true
+            console.log(this.isStart)
 
-                //Change style
-                td.style.backgroundColor = "red"
-
-            } else if (this.end == true || end == true) {
-                this.end = false //Make Parent Cell's start variable false
-                end = false //Make the Cell's start variable false
-
-                //Change style
-                td.style.backgroundColor = "transparent"
-            }
 
         })
                 

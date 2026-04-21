@@ -67,12 +67,12 @@ class Cell {
 
         
         // Generate the HTML element right when the cell is created
-        this.table = this.generateCellDiv(this.x, this.y); 
+        this.table = this.generateCellDiv(this.x, this.y, this.isStart ,this.isEnd, this.isWall); 
     } 
     
     
 
-    generateCellDiv(x,y) {
+    generateCellDiv(x,y, start, end, wall) {
         let td = document.createElement(`td`);
         
         // Set style for each cell
@@ -81,10 +81,46 @@ class Cell {
 
         //Check if clicked
         td.addEventListener("click", function(){
-            console.log(isStart)
-//            if (super(isStart) != true) {
-  //              super()
-    //        }
+            //Check if there is already a start Cell and if not assign the cell as the Start Cell
+            if (this.start != true) {
+                this.start = true //Make Parent Cell's start variable true
+                start = true //Make the Cell's start variable true
+
+                //Change style
+                td.style.backgroundColor = "green"
+
+            } else if (this.end == false && this.start == true) {
+                this.start = false //Make Parent Cell's start variable false
+                start = false //Make the Cell's start variable false
+
+                //Change style
+                td.style.backgroundColor = "red"
+
+            } else if (this.end == true && this.start == true) {
+                wall = true
+
+                //change style
+                td.style.backgroundColor = "black"
+            } else if (this)
+///////////////////////////////////////////////////////////////
+
+            //Check if there is already an end Cell and if not assign the cell as the End Cell
+            console.log(start)
+            if (this.end != true && end != true && this.start == true) {
+                this.end = true //Make Parent Cell's start variable true
+                end = true //Make the Cell's start variable true
+
+                //Change style
+                td.style.backgroundColor = "red"
+
+            } else if (this.end == true || end == true) {
+                this.end = false //Make Parent Cell's start variable false
+                end = false //Make the Cell's start variable false
+
+                //Change style
+                td.style.backgroundColor = "transparent"
+            }
+
         })
                 
         return td;
