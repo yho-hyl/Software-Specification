@@ -3,6 +3,11 @@
 let x = Number(document.getElementById("width").value);
 let y = Number(document.getElementById("height").value);
 
+//Assign start and end (Global use)
+let st = false;
+let ed = false;
+let wl = 0;
+
 //Create array to test if there was a change
 let xTestTable = [x]
 let yTestTable = [y]
@@ -18,14 +23,15 @@ function autoTable() {
 
         let grid = document.createElement(`table`);
 
-        capsule = []
+
         for (r = 0; r < y; r++) {
             let tableRow = document.createElement(`tr`);
-            let row = capsule.push([])
+            let tbl = []
             for (c = 0; c < x; c++) {
-                let tableColumn = new Cell(c, r); //Will need to change this with Cell class
+                let tableColumn = new Cell(c, r); //Will need to change this with Cell class   c is x and r is y
+                tbl.push([c, r])
                 tableRow.appendChild(tableColumn.table);
-                let column = row.push([])
+                console.log(tbl)
             }
             grid.appendChild(tableRow);
 
@@ -83,33 +89,59 @@ class Cell {
 
         //Check if clicked
         td.addEventListener("click", function(){
-            console.log(start)
-            console.log(this.start)
+            console.log(start);
+            console.log(st);
             //Check if there is already a start Cell and if not assign the cell as the Start Cell
-            if (this.start != true) {
-                this.start = true //Make Parent Cell's start variable true
-                start = true //Make the Cell's start variable true
+            if (start == false && st == false) {
+                st = true; //Make global st true
+                start = true; //Make the Cell's start variable true
+                
+                //Change style
+                td.style.backgroundColor = "green";
+
+            } else if (end == false  && ed == false && st == true) {
+                ed = true; //Make global ed true
+                end = true; //Make the Cell's end variable true
 
                 //Change style
-                td.style.backgroundColor = "green"
+                td.style.backgroundColor = "red";
 
-            } else if (this.end != true && this.start == true) {
-                this.start = false //Make Parent Cell's start variable false
-                start = false //Make the Cell's start variable false
-
-                //Change style
-                td.style.backgroundColor = "red"
-
-            } else {
-                wall = true
+            } else if (st == true && ed == true && wall == false) {
+                wall = true;
+                wl++;
 
                 //change style
-                td.style.backgroundColor = "black"
-            } 
+                td.style.backgroundColor = "black";
+
+
+            } else if (start == true) {
+                st = false;
+                start = false;
+
+                //change style
+                td.style.backgroundColor = "tansparent";
+
+            } else if (end == true) {
+                ed = false;
+                end = false;
+
+                //change style
+                td.style.backgroundColor = "tansparent";
+
+            } else if (st == true && ed == true && wall == true) {
+                wall = false;
+                wl--;
+
+                //change style
+                td.style.backgroundColor = "tansparent";
+
+            } else {
+                console.log("something happened");
+            }
 
             //Check if there is already an end Cell and if not assign the cell as the End Cell
-            console.log(start)
-            console.log(this.isStart)
+            console.log(start);
+            console.log(this.isStart);
 
 
         })
