@@ -89,59 +89,72 @@ class Cell {
 
         //Check if clicked
         td.addEventListener("click", function(){
-            console.log(start);
-            console.log(st);
-            //Check if there is already a start Cell and if not assign the cell as the Start Cell
-            if (start == false && st == false) {
+
+            //start
+            if (st == false && end == false && wall == false) {
                 st = true; //Make global st true
                 start = true; //Make the Cell's start variable true
                 
                 //Change style
                 td.style.backgroundColor = "green";
+                return;
+            }
 
-            } else if (end == false  && ed == false && st == true) {
+            if (st == true && end == false && wall == false && start == true) {
+                st = false;
+                start = false;
+
+                //change style
+                td.style.backgroundColor = "transparent";
+                return;
+            }
+            
+            //end
+            if (ed == false && st == true && start == false && wall == false) {
                 ed = true; //Make global ed true
                 end = true; //Make the Cell's end variable true
 
                 //Change style
                 td.style.backgroundColor = "red";
+                return;
+            }
+            
+            if (ed == true && st == true && start == false && wall == false && end == true) {
+                ed = false;
+                end = false;
 
-            } else if (st == true && ed == true && wall == false) {
+                //change style
+                td.style.backgroundColor = "transparent";
+                return;
+            }
+            
+            //wall
+            if (st == true && ed == true && start == false && end == false && wall == false) {
                 wall = true;
                 wl++;
 
                 //change style
                 td.style.backgroundColor = "black";
-
-
-            } else if (start == true) {
-                st = false;
-                start = false;
-
-                //change style
-                td.style.backgroundColor = "tansparent";
-
-            } else if (end == true) {
-                ed = false;
-                end = false;
-
-                //change style
-                td.style.backgroundColor = "tansparent";
-
-            } else if (st == true && ed == true && wall == true) {
+                return;
+            }
+            
+            if (st == true && ed == true && start == false && end == false && wall == true) {
                 wall = false;
                 wl--;
-
+                
                 //change style
-                td.style.backgroundColor = "tansparent";
-
-            } else {
-                console.log("something happened");
+                td.style.backgroundColor = "transparent";
+                return;
             }
 
             //Check if there is already an end Cell and if not assign the cell as the End Cell
-            console.log(start);
-            console.log(this.isStart);
+            console.log("Start: " + start);
+            console.log("End: " + end);
+            console.log("Wall: " + wall)
+            console.log("st: " + st)
+            console.log("ed: " + ed)
+            console.log("")
+
 
 
         })
