@@ -12,6 +12,10 @@ let wl = 0;
 let xTestTable = [x]
 let yTestTable = [y]
 
+// Submit function
+document.getElementById("submit").addEventListener("click", function() {
+    console.log("test");
+})
 
 
 //Create table
